@@ -88,7 +88,7 @@ func ValidateToken(signedToken string) (claims *SignedDetails, msg string) {
 func UpdateAllTokens(signedToken string, signedRefreshToken string, user_id string) {
 	var c, cancel = context.WithTimeout(context.Background(), 100*time.Second)
 	var updateObj primitive.D
-
+	// Add token and refresh token
 	updateObj = append(updateObj, bson.E{Key: "token", Value: signedToken})
 	updateObj = append(updateObj, bson.E{Key: "refresh_token", Value: signedRefreshToken})
 
@@ -101,7 +101,7 @@ func UpdateAllTokens(signedToken string, signedRefreshToken string, user_id stri
 	opt := options.UpdateOptions{
 		Upsert: &upsert,
 	}
-
+	// Update in DB
 	_, err := userCollection.UpdateOne(
 		c,
 		filter,

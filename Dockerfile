@@ -10,6 +10,6 @@ RUN go mod download
 
 RUN go build -o go-jwt-project .
 
-EXPOSE 9000
+EXPOSE 8000
 
 CMD ["/app/go-jwt-project"]

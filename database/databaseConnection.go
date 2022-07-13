@@ -19,7 +19,7 @@ func DBinstance() *mongo.Client {
 		log.Fatal("Error in loading .env file")
 	}
 	// Getting mongo url
-	MongoDb := os.Getenv("MONGODB_URL")
+	MongoDb := os.Getenv("MONGODB_ATLAS_URL")
 	// Creating new client with mongo url
 	client, err := mongo.NewClient(options.Client().ApplyURI(MongoDb))
 

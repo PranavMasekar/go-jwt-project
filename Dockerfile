@@ -1,14 +1,20 @@
-FROM golang:1.16-alpine
+FROM golang:1.16-alpine As builder
 
-RUN mkdir /app
-
-ADD . /app
+RUN apk add --no-cache git
 
 WORKDIR /app
+
+COPY . .
 
 RUN go mod download
 
 RUN go build -o go-jwt-project .
+
+FROM alpine:latest
+
+RUN apk add --no-cache ca-certificates
+
+COPY --from=builder /app/go-jwt-project /app/go-jwt-project
 
 EXPOSE 8000
 
